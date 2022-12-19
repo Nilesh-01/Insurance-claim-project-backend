@@ -10,8 +10,8 @@ using insuranceManagement.Data;
 namespace insuranceManagement.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221124175805_VehicleAdded")]
-    partial class VehicleAdded
+    [Migration("20221215153704_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,53 @@ namespace insuranceManagement.Migrations
                 .HasAnnotation("ProductVersion", "2.1.14-servicing-32113")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("insuranceManagement.Data.Models.Claims", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("dateOfAccident");
+
+                    b.Property<string>("driverName");
+
+                    b.Property<string>("licenseNo");
+
+                    b.Property<string>("status");
+
+                    b.Property<int>("userId");
+
+                    b.Property<int>("vehicleId");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("userId");
+
+                    b.ToTable("Claims");
+                });
+
+            modelBuilder.Entity("insuranceManagement.Data.Models.Policy", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("endDate");
+
+                    b.Property<string>("policyName");
+
+                    b.Property<DateTime>("startDate");
+
+                    b.Property<int>("vehicleId");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("vehicleId")
+                        .IsUnique();
+
+                    b.ToTable("Policy");
+                });
 
             modelBuilder.Entity("insuranceManagement.Data.Models.User", b =>
                 {
@@ -69,6 +116,22 @@ namespace insuranceManagement.Migrations
                     b.HasIndex("userId");
 
                     b.ToTable("Vehicle");
+                });
+
+            modelBuilder.Entity("insuranceManagement.Data.Models.Claims", b =>
+                {
+                    b.HasOne("insuranceManagement.Data.Models.User", "user")
+                        .WithMany("claims")
+                        .HasForeignKey("userId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("insuranceManagement.Data.Models.Policy", b =>
+                {
+                    b.HasOne("insuranceManagement.Data.Models.Vehicle", "vehicle")
+                        .WithOne("policy")
+                        .HasForeignKey("insuranceManagement.Data.Models.Policy", "vehicleId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("insuranceManagement.Data.Models.Vehicle", b =>

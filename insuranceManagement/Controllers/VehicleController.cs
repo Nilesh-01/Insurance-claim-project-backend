@@ -30,11 +30,18 @@ namespace insuranceManagement.Controllers
             return Ok(allVehicles);
         }
 
-        [HttpGet("get-vehicle-by-id/{id}")]
+        [HttpGet("get-vehicle-by-userId/{id}")]
         public IActionResult GetVehicleById(int id)
         {
             var VehiclesOfId = _vehicleService.GetVehicleByUserId(id);
             return Ok(VehiclesOfId);
+        }
+
+        [HttpGet("get-vehicle-by-vehicleId/{vehicleId}")]
+        public IActionResult GetVehicleByVehicleId(int vehicleId)
+        {
+            var VehicleOfId = _vehicleService.GetVehicleByVehicleId(vehicleId);
+            return Ok(VehicleOfId);
         }
 
         [HttpPost("add-vehicle")]

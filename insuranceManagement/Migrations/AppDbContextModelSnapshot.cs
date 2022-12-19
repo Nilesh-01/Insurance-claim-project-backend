@@ -27,11 +27,17 @@ namespace insuranceManagement.Migrations
 
                     b.Property<DateTime>("dateOfAccident");
 
-                    b.Property<byte>("document");
+                    b.Property<string>("driverName")
+                        .IsRequired();
 
-                    b.Property<string>("licenseNo");
+                    b.Property<string>("licenseNo")
+                        .IsRequired();
+
+                    b.Property<string>("status");
 
                     b.Property<int>("userId");
+
+                    b.Property<int>("vehicleId");
 
                     b.HasKey("id");
 
@@ -48,7 +54,8 @@ namespace insuranceManagement.Migrations
 
                     b.Property<DateTime>("endDate");
 
-                    b.Property<string>("policyName");
+                    b.Property<string>("policyName")
+                        .IsRequired();
 
                     b.Property<DateTime>("startDate");
 
@@ -68,7 +75,8 @@ namespace insuranceManagement.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("address");
+                    b.Property<string>("address")
+                        .IsRequired();
 
                     b.Property<int>("age");
 
@@ -76,11 +84,14 @@ namespace insuranceManagement.Migrations
 
                     b.Property<string>("email");
 
-                    b.Property<string>("name");
+                    b.Property<string>("name")
+                        .IsRequired();
 
-                    b.Property<string>("password");
+                    b.Property<string>("password")
+                        .IsRequired();
 
-                    b.Property<int>("phone");
+                    b.Property<string>("phone")
+                        .IsRequired();
 
                     b.Property<string>("role");
 
@@ -95,15 +106,19 @@ namespace insuranceManagement.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("registrationNo");
+                    b.Property<string>("registrationNo")
+                        .IsRequired();
 
                     b.Property<int>("userId");
 
-                    b.Property<string>("vehicleModel");
+                    b.Property<string>("vehicleModel")
+                        .IsRequired();
 
-                    b.Property<string>("vehicleNo");
+                    b.Property<string>("vehicleNo")
+                        .IsRequired();
 
-                    b.Property<string>("vehicleType");
+                    b.Property<string>("vehicleType")
+                        .IsRequired();
 
                     b.HasKey("id");
 

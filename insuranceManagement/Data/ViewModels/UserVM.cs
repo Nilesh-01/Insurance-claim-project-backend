@@ -12,7 +12,7 @@ namespace insuranceManagement.Data.ViewModels
         public string email { get; set; }
         public string password { get; set; }
         public int age { get; set; }
-        public int phone { get; set; }
+        public string phone { get; set; }
         public string role { get; set; }
         public DateTime dob { get; set; }
     }

@@ -23,7 +23,7 @@ namespace insuranceManagement.Data.Services
                 vehicleModel = vehicle.vehicleModel,
                 vehicleNo = vehicle.vehicleNo,
                 registrationNo = vehicle.registrationNo,
-                userId = vehicle.userId
+                userId = vehicle.userId,
             };
             _context.Vehicle.Add(_vehicle);
             _context.SaveChanges(); 
@@ -32,5 +32,7 @@ namespace insuranceManagement.Data.Services
         public List<Vehicle> GetAllVehicle() => _context.Vehicle.ToList();
 
         public List<Vehicle> GetVehicleByUserId(int userId) => _context.Vehicle.Where(n => n.userId == userId).ToList();
+
+        public Vehicle GetVehicleByVehicleId(int vehicleId) => _context.Vehicle.FirstOrDefault(n => n.id == vehicleId);
     }
 }

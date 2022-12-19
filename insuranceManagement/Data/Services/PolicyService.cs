@@ -17,25 +17,23 @@ namespace insuranceManagement.Data.Services
 
         public void AddPolicy(PolicyVM policy)
         {
+            var _vehicle = _context.Vehicle.Where(n => n.id == policy.vehicleId).FirstOrDefault();
             var _policy = new Policy()
             {
                 policyName = policy.policyName,
                 startDate = policy.startDate,
                 endDate = policy.endDate,
-                vehicleId = policy.vehicleId
+                vehicleId = policy.vehicleId,
+                //vehicle = _vehicle
             };
             _context.Policy.Add(_policy);
+            _context.SaveChanges();
+
+            //var _policyinDB = _context.Policy.Where(n => n.vehicleId == policy.vehicleId).FirstOrDefault();
             
-            _context.SaveChanges();
-
-
-            var _vehicle = _context.Vehicle.Where(n => n.id == policy.vehicleId).FirstOrDefault();
-            System.Diagnostics.Debug.WriteLine("Output" + _vehicle);
-            _context.Entry(_vehicle).Reference(v => v.policy).Load();
-            _vehicle.policy = _policy;
-            _context.Entry(_vehicle).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            //_context.Vehicle.Update(_vehicle);
-            _context.SaveChanges();
+            //_vehicle.policy = _policyinDB;
+            //_context.Vehicle.AddAsync(_vehicle);
+            //_context.SaveChanges();
         }
 
         public List<Policy> GetAllPolicy() => _context.Policy.ToList();

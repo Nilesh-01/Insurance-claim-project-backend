@@ -33,7 +33,7 @@ namespace insuranceManagement
         {
             services.AddCors(options => options.AddPolicy("ApiCorsPolicy", builder =>
             {
-                builder.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+                builder.WithOrigins("http://localhost:3006").AllowAnyMethod().AllowAnyHeader();
             }));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
@@ -44,6 +44,7 @@ namespace insuranceManagement
             services.AddTransient<UserService>();
             services.AddTransient<VehicleService>();
             services.AddTransient<PolicyService>();
+            services.AddTransient<ClaimsService>();
 
             services.AddSwaggerGen(c =>
             {
